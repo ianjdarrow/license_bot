@@ -30,7 +30,8 @@ func main() {
 				fmt.Printf("%s %s\n", repo.FullName, color.RedString("NONE"))
 				continue
 			}
-			fmt.Printf("%s %s\n", repo.FullName, color.YellowString(strings.Join(repo.ObservedLicenses, ", ")))
+
+			fmt.Printf("%s %s (%s)\n", repo.FullName, color.YellowString(strings.Join(repo.ObservedLicenses, ", ")), repo.License.Name)
 		}
 	case "contributors":
 		contributors := c.getAllContributors()
