@@ -2,6 +2,10 @@
 
 updating open source licenses in large organizations with many repos & contributors is very, very difficult. let's see how much we can automate it.
 
+# current status
+
+not ready for use. see "usage" below for current functionality.
+
 # vision
 
 your project wants to adopt a new open source license. this script:
