@@ -99,7 +99,7 @@ func (c *client) getCurrentTree(repo string) tree {
 }
 
 func (c *client) getRepoLicense(repo string) []string {
-	licenseRegexp, _ := regexp.Compile(`^(?i)licen[c/s]e*$`)
+	licenseRegexp, _ := regexp.Compile(`^(?i)licen[c/s]e(.?)(txt|md|-.*)?$`)
 	t := c.getCurrentTree(repo)
 	licenses := []string{}
 	for _, b := range t.Tree {

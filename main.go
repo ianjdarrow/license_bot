@@ -21,8 +21,10 @@ func main() {
 	switch args.action {
 	case "licenses":
 		repos := c.getAllLicenses()
+		good := 0.0
 		for _, repo := range repos {
 			if licensesAreGood(repo.ObservedLicenses) {
+				good++
 				fmt.Printf("%s %s\n", repo.FullName, color.GreenString(strings.Join(repo.ObservedLicenses, ", ")))
 				continue
 			}
@@ -33,6 +35,18 @@ func main() {
 
 			fmt.Printf("%s %s (%s)\n", repo.FullName, color.YellowString(strings.Join(repo.ObservedLicenses, ", ")), repo.License.Name)
 		}
+		coverage := good / float64(len(repos)) * 100
+		var result string
+		if coverage < 60 {
+			result = color.RedString("%.1f", coverage)
+		}
+		if coverage >= 60 && coverage < 95 {
+			result = color.YellowString("%.1f", coverage)
+		}
+		if coverage >= 95 {
+			result = color.GreenString("%.1f", coverage)
+		}
+		fmt.Printf("%s license coverage: %s%%\n", c.org, result)
 	case "contributors":
 		contributors := c.getAllContributors()
 		for _, con := range contributors {
