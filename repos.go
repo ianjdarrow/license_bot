@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -98,11 +99,12 @@ func (c *client) getCurrentTree(repo string) tree {
 }
 
 func (c *client) getRepoLicense(repo string) []string {
+	licenseRegexp, _ := regexp.Compile(`^(?i)licen[c/s]e*$`)
 	t := c.getCurrentTree(repo)
 	licenses := []string{}
 	for _, b := range t.Tree {
 		pathLower := strings.ToLower(b.Path)
-		if strings.HasPrefix(pathLower, "license") || strings.HasPrefix(pathLower, "copyright") {
+		if licenseRegexp.MatchString(pathLower) || strings.HasPrefix(pathLower, "copyright") {
 			licenses = append(licenses, b.Path)
 		}
 	}
