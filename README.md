@@ -1,3 +1,17 @@
+# goals
+
+updating open source licenses in large organizations with many repos & contributors is very, very difficult. let's see how much we can automate it.
+
+# vision
+
+your project wants to adopt a new open source license. this script:
+
+- scrubs every repo in your organization, identifying all those that don't currently used the desired license
+- assembles a list of every contributor whose consent is required to fully adopt the new license for all existing code
+- creates a tracking issue where folks can consent to the license change
+- submits a single PR for every single repo to delete existing license files and add the new ones
+- tracks progress & identifies people to follow up with for consent for the license change
+
 # installation
 
 1. clone repo
